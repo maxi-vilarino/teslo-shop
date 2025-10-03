@@ -11,6 +11,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { CustomLogo } from "@/components/custom/CustomLogo";
+import { Link, useLocation } from "react-router";
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -21,9 +22,10 @@ export const AdminSidebar: React.FC<SidebarProps> = ({
   isCollapsed,
   onToggle,
 }) => {
+  const { pathname } = useLocation();
   const menuItems = [
-    { icon: Home, label: "Dashboard", active: true },
-    { icon: BarChart3, label: "Analytics" },
+    { icon: Home, label: "Dashboard", to: "/admin" },
+    { icon: BarChart3, label: "Products", to: "/admin/products" },
     { icon: Users, label: "Users" },
     { icon: ShoppingCart, label: "Orders" },
     { icon: FileText, label: "Reports" },
@@ -31,6 +33,10 @@ export const AdminSidebar: React.FC<SidebarProps> = ({
     { icon: Settings, label: "Settings" },
     { icon: HelpCircle, label: "Help" },
   ];
+
+  const isActiveRoute = (to: string) => {
+    return pathname === to;
+  };
 
   return (
     <div
@@ -56,11 +62,11 @@ export const AdminSidebar: React.FC<SidebarProps> = ({
             const Icon = item.icon;
             return (
               <li key={index}>
-                <a
-                  href="#"
+                <Link
+                  to={item.to ? item.to : "/admin"}
                   className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-all duration-200 group ${
-                    item.active
-                      ? "bg-blue-50 text-blue-600 border-r-2 border-blue-600"
+                    isActiveRoute(item.to || "/xxx")
+                      ? "bg-blue-50 text-blue-600  border-blue-600"
                       : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                   }`}
                 >
@@ -68,7 +74,7 @@ export const AdminSidebar: React.FC<SidebarProps> = ({
                   {!isCollapsed && (
                     <span className="font-medium">{item.label}</span>
                   )}
-                </a>
+                </Link>
               </li>
             );
           })}
