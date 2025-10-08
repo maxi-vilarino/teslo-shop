@@ -29,7 +29,7 @@ export const CustomHeader = () => {
           <CustomLogo />
 
           {/* Navigation - Desktop */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-5 md:mr-4">
             <Link
               to="/"
               className={cn(

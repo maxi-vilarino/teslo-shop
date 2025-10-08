@@ -6,7 +6,7 @@ interface Props {
 
 export const CustomLogo = ({ subtitle = "Shop" }: Props) => {
   return (
-    <Link to="/" className="flex items-center whitespace-nowrap">
+    <Link to="/" className="flex items-center whitespace-nowrap md:mr-4">
       <span className="font-montserrat font-bold text-xl m-0 whitespace-nowrap">
         Teslo |
       </span>
