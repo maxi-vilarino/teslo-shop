@@ -6,15 +6,18 @@ import { Label } from "@/components/ui/label";
 
 export const FilterSidebar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentSize = searchParams.get("size")?.split(",") || [];
+  const sizesParam = searchParams.get("sizes");
+  const currentSizes =
+    sizesParam && sizesParam !== "" ? sizesParam.split(",") : [];
   const currentPrice = searchParams.get("price") || "any";
 
   const handleSizeChange = (size: string) => {
-    const newSizes = currentSize.includes(size)
-      ? currentSize.filter((s) => s !== size)
-      : [...currentSize, size];
+    const newSizes = currentSizes?.includes(size)
+      ? currentSizes.filter((s) => s !== size)
+      : [...currentSizes, size];
+
     searchParams.set("page", "1");
-    searchParams.set("size", newSizes.join(","));
+    searchParams.set("sizes", newSizes.join(","));
     setSearchParams(searchParams);
   };
 
@@ -46,7 +49,7 @@ export const FilterSidebar = () => {
           {sizes.map((size) => (
             <Button
               key={size.id}
-              variant={currentSize.includes(size.id) ? "default" : "outline"}
+              variant={currentSizes.includes(size.id) ? "default" : "outline"}
               size="sm"
               className="h-8"
               onClick={() => handleSizeChange(size.id)}
