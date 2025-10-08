@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { Outlet } from "react-router";
 import { AdminSidebar } from "../components/AdminSidebar";
 import { AdminHeader } from "../components/AdminHeader";
-import { Outlet } from "react-router";
 
 const AdminLayout = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
