@@ -12,6 +12,10 @@ import { ShopLayout } from "./shop/layouts/ShopLayout";
 import { GenderPage } from "./shop/page/gender/GenderPage";
 import { HomePage } from "./shop/page/home/HomePage";
 import { ProductPage } from "./shop/page/product/ProductPage";
+import {
+  AdminRoute,
+  NotAuthenticatedRoute,
+} from "./components/routes/ProtectedRoutes";
 
 const AuthLayout = lazy(() => import("./auth/layouts/AuthLayout"));
 const AdminLayout = lazy(() => import("./admin/layouts/AdminLayout"));
@@ -40,7 +44,11 @@ export const appRouter = createBrowserRouter([
   // Auth Routes
   {
     path: "/auth",
-    element: <AuthLayout />,
+    element: (
+      <NotAuthenticatedRoute>
+        <AuthLayout />,
+      </NotAuthenticatedRoute>
+    ),
     children: [
       {
         index: true,
@@ -59,7 +67,12 @@ export const appRouter = createBrowserRouter([
   // Admin Routes
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: (
+      <AdminRoute>
+        <AdminLayout />,
+      </AdminRoute>
+    ),
+
     children: [
       {
         index: true,
