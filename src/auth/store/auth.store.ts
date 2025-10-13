@@ -1,5 +1,5 @@
-import type { User } from "@/interfaces/user.interface";
 import { create } from "zustand";
+import type { User } from "@/interfaces/user.interface";
 import { loginAction } from "../actions/login.action";
 import { checkAuthAction } from "../actions/check-auth.action";
 import { registerAction } from "../actions/register.action";
