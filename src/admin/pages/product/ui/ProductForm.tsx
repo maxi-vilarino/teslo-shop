@@ -11,11 +11,19 @@ interface Props {
   title: string;
   subTitle: string;
   product: Product;
+  onSubmit: (productLike: Partial<Product>) => void;
+  pending: boolean;
 }
 
 const availableSizes: Size[] = ["XS", "S", "M", "L", "XL", "XXL"];
 
-export const ProductForm = ({ title, subTitle, product }: Props) => {
+export const ProductForm = ({
+  title,
+  subTitle,
+  product,
+  onSubmit,
+  pending,
+}: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [dragActive, setDragActive] = useState(false);
@@ -84,23 +92,19 @@ export const ProductForm = ({ title, subTitle, product }: Props) => {
     console.log(files);
   };
 
-  const onSubmit = (productLike: Product) => {
-    console.log("onSubmit", productLike);
-  };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex justify-between items-center">
         <AdminTitle title={title} subtitle={subTitle} />
         <div className="flex justify-end mb-10 gap-4">
-          <Button variant="outline">
+          <Button variant="outline" type="button">
             <Link to="/admin/products" className="flex items-center gap-2">
               <X className="w-4 h-4" />
               Cancelar
             </Link>
           </Button>
 
-          <Button>
+          <Button type="submit" disabled={pending}>
             <SaveAll className="w-4 h-4" />
             Guardar cambios
           </Button>
