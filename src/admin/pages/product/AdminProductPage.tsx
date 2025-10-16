@@ -22,7 +22,7 @@ export const AdminProductPage = () => {
         toast.success("Producto actualizado correctamente", {
           position: "top-right",
         });
-        navigate(`/admin/products/${data.id}`);
+        navigate(`/admin/products`);
       },
       onError: (error) => {
         console.error(error);
